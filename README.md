@@ -1,6 +1,6 @@
 <h1>ExpNo 8 : Solve Cryptarithmetic Problem,a CSP(Constraint Satisfaction Problem) using Python</h1> 
-<h3>Name: MAHA SHREE M              </h3>
-<h3>Register Number: 212224110035    </h3>
+<h3>Name: Reena K             </h3>
+<h3>Register Number: 212224040272   </h3>
 <H3>Aim:</H3>
 <p>
     To solve Cryptarithmetic Problem,a CSP(Constraint Satisfaction Problem) using Python
