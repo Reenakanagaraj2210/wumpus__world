@@ -1,120 +1,152 @@
-<h1>ExpNo 8 : Solve Cryptarithmetic Problem,a CSP(Constraint Satisfaction Problem) using Python</h1> 
-<h3>Name: Reena K             </h3>
-<h3>Register Number: 212224040272   </h3>
+<h1>ExpNo 9: Solve Wumpus World Problem using Python demonstrating Inferences from Propositional Logic</h1> 
+<h3>Name:  Reena K                 </h3>
+<h3>Register Number: 212224040272            </h3>
 <H3>Aim:</H3>
 <p>
-    To solve Cryptarithmetic Problem,a CSP(Constraint Satisfaction Problem) using Python
+    To solve  Wumpus World Problem using Python demonstrating Inferences from Propositional Logic
 </p>
-<h3>Procedure:</h3>
-Input and Output
-<br>Input:
-This algorithm will take three words.
-<br> B A S E<br>
-    B A L L<br>
-           ----------<br>
-           G A M E S<br>
-
-Output:
-It will show which letter holds which number from 0 – 9.
-For this case it is like this.
-
-              B A S E                         2 4 6 1
-              B A L L                         2 4 5 5
-             ---------                       ---------
-            G A M E S                       0 4 9 1 6
-Algorithm
-For this problem, we will define a node, which contains a letter and its corresponding values.<br>
-
-isValid(nodeList, count, word1, word2, word3)<br>
-
-Input − A list of nodes, the number of elements in the node list and three words.<br>
-
-Output − True if the sum of the value for word1 and word2 is same as word3 value.<br>
-
-Begin<br>
-   m := 1<br>
-   for each letter i from right to left of word1, do<br>
-      ch := word1[i]<br>
-      for all elements j in the nodeList, do<br>
-         if nodeList[j].letter = ch, then<br>
-            break<br>
-      done<br>
-      val1 := val1 + (m * nodeList[j].value)<br>
-      m := m * 10<br>
-   done<br>
-
-   m := 1<br>
-   for each letter i from right to left of word2, do<br>
-      ch := word2[i]<br>
-      for all elements j in the nodeList, do<br>
-         if nodeList[j].letter = ch, then<br>
-            break<br>
-      done<br>
-
-      val2 := val2 + (m * nodeList[j].value)
-      m := m * 10
-   done<br>
-
-   m := 1<br>
-   for each letter i from right to left of word3, do<br>
-      ch := word3[i]<br>
-      for all elements j in the nodeList, do<br>
-         if nodeList[j].letter = ch, then<br>
-            break<br>
-      done<br>
-
-      val3 := val3 + (m * nodeList[j].value)
-      m := m * 10
-   done<br>
-
-   if val3 = (val1 + val2), then<br>
-      return true<br>
-   return false<br>
-End<br>
+<h1>Problem Description</h1>
 <hr>
-<h2>Sample Input and Output:</h2>
-SEND = 9567<br>
-MORE = 1085<br>
+<h2>Wumpus World</h2>
 <hr>
-MONEY = 10652<br>
+The Wumpus world is a simple world example to illustrate the worth of a knowledge-based agent and to represent knowledge representation.
+
+The figure below shows a Wumpus world containing one pit and one Wumpus. There is an agent in room [1,1]. The goal of the agent is to exit the Wumpus world alive. The agent can exit the Wumpus world by reaching room [4,4]. The wumpus world contains exactly one Wumpus and one pit. There will be a breeze in the rooms adjacent to the pit, and there will be a stench in the rooms adjacent to Wumpus.
+
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/cd6b68dc-c79f-4dcb-8126-04da90d65912)
+
+<center>Wumpus World Representation</center>
+<p>
+This is a python program that uses propositional logic sentences to check which rooms are safe. 
+
+It is assumed that there will always be a safe path that the agent can take to exit the Wumpus world. The logical agent can take four actions: Up, Down, Left and Right. These actions help the agent move from one room to an adjacent room. The agent can perceive two things: Breeze and Stench.
+</p>
+
 <hr>
+<h1>Sample Input and Output:</h1>
+<hr>
+
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/8696111a-a4a7-47cb-ba4b-43a4ef88573f)
+![image](https://github.com/natsaravanan/19AI405FUNDAMENTALSOFARTIFICIALINTELLIGENCE/assets/87870499/4be5bf06-79fa-4fa0-9334-38a33f06060b)
+
 ## PROGRAM:
-
 ```
-from itertools import permutations
 
-def solve_cryptarithmetic():
-    for perm in permutations(range(10), 8):
-        S, E, N, D, M, O, R, Y = perm
+wumpus=[["Save","Breeze","PIT","Breeze"],
+        ["Smell","Save","Breeze","Save"],
+        ["WUMPUS","GOLD","PIT","Breeze"],
+        ["Smell","Save","Breeze","PIT"]]
+row=0
+column=0
+arrow=True
+player=True
+score=0
+while(player):
+    choice=input("press u to move up\npress d to move down\npress l to move left\npress r to move right\n")
+    if choice == "u":
+        if row != 0:
+            row-=1
+        else:
+            print("move denied")
+        
+        print("current location: ",wumpus[row][column],"\n")
+    elif choice == "d" :
+        if row!=3:
+            row+=1
+        else:
+            print("move denied")
+        
+        print("current location: ",wumpus[row][column],"\n")
+    elif choice == "l" :
+        if column!=0:
+            column-=1
+        else:
+            print("move denied")
+        
+        print("current location: ",wumpus[row][column],"\n")
+    elif choice == "r" :
+        if column!=3:
+            column+=1
+        else:
+            print("move denied")
+        
+        print("current location: ",wumpus[row][column],"\n")
+    else:
+        print("move denied")
 
-        # Check for leading zeros
-        if S == 0 or M == 0:
-            continue
-
-        # Check the equation constraints
-        SEND = 1000 * S + 100 * E + 10 * N + D
-        MORE = 1000 * M + 100 * O + 10 * R + E
-        MONEY = 10000 * M + 1000 * O + 100 * N + 10 * E + Y
-
-        if SEND + MORE == MONEY:
-            return SEND, MORE, MONEY
-
-    return None
-
-# Call the function
-solution = solve_cryptarithmetic()
-
-if solution:
-    SEND, MORE, MONEY = solution
-    print(f'SEND = {SEND}')
-    print(f'MORE = {MORE}')
-    print(f'MONEY = {MONEY}')
-else:
-    print("No solution found.")
+    if wumpus[row][column]=="Smell" and arrow != False:
+        arrow_choice=input("do you want to throw an arrow-->\npress y to throw\npress n to save your arrow\n")
+        if arrow_choice == "y":
+            arrow_throw=input("press u to throw up\npress d to throw down\npress l to throw left\npress r to throw right\n")
+            if arrow_throw == "u":
+                if wumpus[row-1][column] == "WUMPUS":
+                    print("wumpus killed!")
+                    score+=1000
+                    print("score: ",score)
+                    wumpus[row-1][column] = "Save"
+                    wumpus[1][0]="Save"
+                    wumpus[3][0]="Save"
+                else:
+                    print("arrow wasted...")
+                    score-=10
+                    print("score: ",score)
+            elif arrow_throw == "d":
+                if wumpus[row+1][column] == "WUMPUS":
+                    print("wumpus killed!")
+                    score+=1000
+                    print("score: ",score)
+                    wumpus[row+1][column] = "Save"
+                    wumpus[1][0]="Save"
+                    wumpus[3][0]="Save"
+                else:
+                    print("arrow wasted...")
+                    score-=10
+                    print("score: ",score)
+            elif arrow_throw == "l":
+                if wumpus[row][column-1] == "WUMPUS":
+                    print("wumpus killed!")
+                    score+=1000
+                    print("score: ",score)
+                    wumpus[row][column-1] = "Save"
+                    wumpus[1][0]="Save"
+                    wumpus[3][0]="Save"
+                else:
+                    print("arrow wasted...")
+                    score-=10
+                    print("score: ",score)
+            elif arrow_throw == "r":
+                if wumpus[row][column+1] == "WUMPUS":
+                    print("wumpus killed!")
+                    score+=1000
+                    print("score: ",score)
+                    wumpus[row][column+1] = "Save"
+                    wumpus[1][0]="Save"
+                    wumpus[3][0]="Save"
+                else:
+                    print("arrow wasted...")
+                    score-=10
+                    print("score: ",score)
+                
+            
+            arrow=False
+    if wumpus[row][column] == "WUMPUS" :
+        score-=1000
+        print("\nWumpus here!!\n You Die\nAnd your score is: ",score
+              ,"\n")
+        break
+    if(wumpus[row][column]=='GOLD'):
+        score+=1000
+        print("GOLD FOUND!You won....\nYour score is: ",score,"\n")
+        break
+    if(wumpus[row][column]=='PIT'):
+        score-=1000
+        print("Ahhhhh!!!!\nYou fell in pit.\nAnd your score is: ",score,"\n")
+        break
 ```
 
 ## OUTPUT:
-<img width="420" height="142" alt="image" src="https://github.com/user-attachments/assets/60133225-dd5b-45e6-91bc-061f6c9d3479" />
+<img width="807" height="638" alt="image" src="https://github.com/user-attachments/assets/03424ef6-7104-428a-9237-dd0b04890105" />
 
-<h2>Result:</h2>
-<p> Thus a Cryptarithmetic Problem was solved using Python successfully</p>
+## RESULT:
+
+Thus, the program for WUMPUS WORLD has been executed successfully.
